@@ -141,7 +141,11 @@ const CardComponent = ({ data, media_type }) => {
                       onClick={() => addHandler(data, "favorite")}
                     >
                       <Heart
-                        fill={`${!!isExistedFavorite && "red"}`}
+                        fill={`${
+                          !!isExistedFavorite &&
+                          localStorage.getItem("sessionID") &&
+                          "red"
+                        }`}
                         className=" w-10 h-10 text-white border border-secondary-50 p-3 rounded-full"
                       />
                     </div>
@@ -161,7 +165,11 @@ const CardComponent = ({ data, media_type }) => {
                       onClick={() => addHandler(data, "watchlist")}
                     >
                       <Bookmark
-                        fill={`${!!isExistedWatchLists && "red"}`}
+                        fill={`${
+                          !!isExistedWatchLists &&
+                          localStorage.getItem("sessionID") &&
+                          "red"
+                        }`}
                         className=" w-10 h-10 text-white border border-secondary-50 p-3 rounded-full"
                       />
                     </div>

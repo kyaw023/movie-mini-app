@@ -44,7 +44,10 @@ const App = () => {
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("sessionID")) {
+    if (
+      localStorage.getItem("sessionID") &&
+      localStorage.getItem("accountID")
+    ) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
@@ -103,25 +106,25 @@ const App = () => {
         {/* favorite and watchlist */}
 
         <Route
-          path="/u/:username/watchlist"
+          path="/watchlist"
           element={isAuth ? <WatchListsPage /> : <NotFoundPage />}
         >
           <Route path="tv" element={<WatchListTvPage />} />
           <Route index element={<WatchListsMoviePage />} />
         </Route>
         <Route
-          path="/u/:username/favorite"
+          path="/favorite"
           element={isAuth ? <FavoritePage /> : <NotFoundPage />}
         >
           <Route path="tv" element={<FavoriteTvPage />} />
           <Route index element={<FavoriteMoviePage />} />
         </Route>
         <Route
-          path="/u/:username/lists"
+          path="/lists"
           element={isAuth ? <ListsPage /> : <NotFoundPage />}
         />
         <Route
-          path="/u/:username/rating"
+          path="/rating"
           element={isAuth ? <RatingPage /> : <NotFoundPage />}
         />
       </Routes>

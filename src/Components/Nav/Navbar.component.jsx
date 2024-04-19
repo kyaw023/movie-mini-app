@@ -48,6 +48,8 @@ const NavbarComponent = ({ isLoading }) => {
 
   const queryName = data?.results[0]?.media_type;
 
+  console.log(data);
+
   const onSubmitHandler = (e) => {
     e.preventDefault();
     navigator(`/search/${queryName}/${searchValues}`, {
@@ -201,7 +203,7 @@ const NavbarComponent = ({ isLoading }) => {
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Link
-                            to={`/u/${accountDetail?.username}/lists`}
+                            to={`/lists`}
                             className=" flex items-center justify-center"
                           >
                             <List className="mr-2 h-4 w-4" />
@@ -210,7 +212,7 @@ const NavbarComponent = ({ isLoading }) => {
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Link
-                            to={`/u/${accountDetail?.username}/rating`}
+                            to={`/rating`}
                             className=" flex items-center justify-center"
                           >
                             <Asterisk className="mr-2 h-4 w-4" />
@@ -219,7 +221,7 @@ const NavbarComponent = ({ isLoading }) => {
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Link
-                            to={`/u/${accountDetail?.username}/watchlist`}
+                            to={`/watchlist`}
                             className=" flex items-center justify-center"
                           >
                             <PictureInPicture2 className="mr-2 h-4 w-4" />
@@ -228,7 +230,7 @@ const NavbarComponent = ({ isLoading }) => {
                         </DropdownMenuItem>
                         <DropdownMenuItem>
                           <Link
-                            to={`/u/${accountDetail?.username}/favorite`}
+                            to={`/favorite`}
                             className=" flex items-center justify-center"
                           >
                             <Crown className="mr-2 h-4 w-4" />
