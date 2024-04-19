@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useGetPopularPeopleQuery } from "../../store/endpoints/People.endpoint";
 import {
+  FetchingComponent,
   LoadingComponent,
   NavbarComponent,
   PeopleCardComponent,
@@ -20,25 +21,21 @@ import {
 } from "../../store/slice/pagination/PaginationSlice";
 
 const PeoplePage = () => {
-  const currentPage = useSelector((state) => state.pagination?.currentPage);
+  // const currentPage = useSelector((state) => state.pagination?.currentPage);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+
   const {
     data: popularPeople,
     isLoading,
     isFetching,
   } = useGetPopularPeopleQuery(currentPage);
 
-  console.log(popularPeople);
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
-        {isFetching ? (
-          <div className=" flex items-center justify-center h-screen">
-            <p className=" text-slate-200">Data is Fetching Please wait...</p>
-          </div>
-        ) : (
+        <FetchingComponent isFetching={isFetching}>
           <div className="px-2 md:px-0">
             <div className=" my-6">
               <h1 className=" text-2xl font-semibold text-slate-300">
@@ -55,14 +52,19 @@ const PeoplePage = () => {
               })}
             </div>
           </div>
-        )}
+        </FetchingComponent>
         <div className=" mt-10">
           <Pagination>
             <PaginationContent>
               <PaginationItem className=" bg-white">
-                <PaginationPrevious
-                  onClick={() => dispatch(setCurrentPagePrev(1))}
-                />
+                {currentPage === 1 ? (
+                  <p></p>
+                ) : (
+                  <PaginationPrevious
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                  />
+                )}
               </PaginationItem>
               <PaginationItem className=" bg-white">
                 <PaginationLink href="#">{currentPage}</PaginationLink>
@@ -70,7 +72,7 @@ const PeoplePage = () => {
 
               <PaginationItem className="bg-white">
                 <PaginationNext
-                  onClick={() => dispatch(setCurrentPagePlus(1))}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
                 />
               </PaginationItem>
             </PaginationContent>

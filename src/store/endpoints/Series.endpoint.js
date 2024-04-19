@@ -5,72 +5,72 @@ const SerieEndPoints = MovieAPI.injectEndpoints({
     getTrendingSeries: builder.query({
       query: () =>
         "trending/tv/day?api_key=ec801f669051c57582cfefe0e004e430&language=en-US",
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getSeriesDetail: builder.query({
       query: (id) =>
         `tv/${id}?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getSeriesCast: builder.query({
       query: (id) =>
         `tv/${id}/credits?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getTvSeason: builder.query({
       query: (id) =>
         `tv/${id}/credits?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getSeriesReview: builder.query({
       query: (id) =>
         `tv/${id}/reviews?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=1`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getSeriesVedio: builder.query({
       query: (id) =>
         `tv/${id}/videos?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=1`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getRecommendation: builder.query({
       query: (id) =>
         `tv/${id}/recommendations?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=2`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getCollection: builder.query({
       query: (id) =>
         `collection/${id}?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getKeywords: builder.query({
       query: (id) =>
         `tv/${id}/keywords?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getLanguages: builder.query({
       query: () =>
         `configuration/languages?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      providesTags: ["themoviedb"],
     }),
     getAiringTodaySeries: builder.query({
-      query: () =>
-        `tv/airing_today?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      query: (pageName) =>
+        `tv/airing_today?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
+      providesTags: ["themoviedb"],
     }),
     getPopularSeries: builder.query({
-      query: () =>
-        `tv/popular?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      query: (pageName) =>
+        `tv/popular?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
+      providesTags: ["themoviedb"],
     }),
     getTopRatedSeries: builder.query({
-      query: () =>
-        `tv/top_rated?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      query: (pageName) =>
+        `tv/top_rated?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
+      providesTags: ["themoviedb"],
     }),
     getOnTVSeries: builder.query({
-      query: () =>
-        `tv/on_the_air?api_key=ec801f669051c57582cfefe0e004e430&language=en-US`,
-        providesTags: ["themoviedb"],
+      query: (pageName) =>
+        `tv/on_the_air?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
+      providesTags: ["themoviedb"],
     }),
   }),
 });

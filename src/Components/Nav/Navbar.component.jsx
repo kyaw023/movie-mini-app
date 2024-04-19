@@ -44,11 +44,11 @@ const NavbarComponent = ({ isLoading }) => {
   };
   const { data } = useGetMultiSearchQuery(searchValues);
 
-  const [logoutFun, { data: logoutData }] = useLogoutMutation();
+  console.log(data);
+
+  const [logoutFun] = useLogoutMutation();
 
   const queryName = data?.results[0]?.media_type;
-
-  console.log(data);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
@@ -77,7 +77,9 @@ const NavbarComponent = ({ isLoading }) => {
   const drawerHandler = () => {
     setDrawer((prev) => !prev);
   };
-
+  const signInHandler = () => {
+    navigator("/sign-In");
+  };
   // function if change page  close the drawer
 
   return (
@@ -158,11 +160,12 @@ const NavbarComponent = ({ isLoading }) => {
             </form>
             <div>
               {!localStorage.getItem("sessionID") ? (
-                <Link to={"/sign-In"}>
-                  <Button className=" bg-primary text-slate-100">
-                    Sign In
-                  </Button>
-                </Link>
+                <Button
+                  onClick={signInHandler}
+                  className=" bg-primary text-slate-100"
+                >
+                  Sign In
+                </Button>
               ) : (
                 <div className="">
                   <div>

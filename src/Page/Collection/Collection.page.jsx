@@ -20,7 +20,6 @@ const CollectionPage = () => {
 
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" px-2 md:px-0">
           <MovieDetailCard data={data} />
@@ -55,7 +54,9 @@ const CollectionPage = () => {
                       </div>
                       <Badge>{part?.release_date}</Badge>
 
-                      <p className="mt-2 text-slate-500 text-xs md:text-sm">{part?.overview}</p>
+                      <p className="mt-2 text-slate-500 text-xs md:text-sm">
+                        {part?.overview}
+                      </p>
                     </div>
                   </div>
                 </div>

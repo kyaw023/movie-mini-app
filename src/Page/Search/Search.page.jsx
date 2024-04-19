@@ -18,7 +18,6 @@ const SearchPage = () => {
   return (
     <LoadingComponent isLoading={isLoading}>
       <div>
-        <NavbarComponent isLoading={isLoading} />
         <div className=" mt-14 px-2 md:px-0">
           <div className=" grid md:grid-cols-4 grid-cols-1 gap-10">
             <div className=" border h-[440px] border-secondary-100 rounded-xl">

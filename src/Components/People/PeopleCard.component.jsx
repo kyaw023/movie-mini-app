@@ -11,8 +11,6 @@ const PeopleCardComponent = ({ people }) => {
             src={"https://image.tmdb.org/t/p/w500" + people.profile_path}
             alt=""
           />
-
-          
           <div className="px-3 py-3 mt-3">
             <h1 className=" text-xl font-semibold text-slate-100">
               {people?.name}
@@ -20,11 +18,9 @@ const PeopleCardComponent = ({ people }) => {
             <div className=" flex flex-wrap gap-1 mt-3">
               {people.known_for?.map((name) => {
                 return (
-                  <div className="mb-3">
-                    <p className=" truncate text-xs text-gray-500">
-                      {name.name ? name.name : name.title}
-                    </p>
-                  </div>
+                  <p key={name?.id} className="mb-3 text-xs text-gray-500">
+                    {name.name ? name.name : name.title}
+                  </p>
                 );
               })}
             </div>

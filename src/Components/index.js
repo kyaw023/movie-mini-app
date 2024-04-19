@@ -28,3 +28,4 @@ export { default as CastCrewCardComponent } from "./Cast&CrewComponent/CastCrewC
 export { default as SearchCardComponent } from "./Search/SearchCard.component";
 export { default as ProgressComponent } from "./Progress/Progress.component";
 export { default as RatingComponent } from "./Rating/Rating.component";
+export { default as FetchingComponent } from "./FetchingComponent/Fetching.component";

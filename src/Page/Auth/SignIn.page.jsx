@@ -37,14 +37,13 @@ const SignInPage = () => {
   useEffect(() => {
     if (localStorage.getItem("sessionID")) {
       nav("/");
+      localStorage.removeItem("signIn");
     }
   }, [localStorage.getItem("sessionID")]);
 
   const { data: accountDetail, isLoading } = useGetAccountDetailQuery(
     sessionAccount?.session_id
   );
-
-  console.log();
 
   const initialValue = {
     username: "",
@@ -149,7 +148,10 @@ const SignInPage = () => {
               )}
             </Formik>
             <p className=" text-secondary-50 text-sm mt-4">
-              If you want to see preview <Link to={"/"} className=" text-blue-500">Click it</Link>
+              If you want to see preview{" "}
+              <Link to={"/"} className=" text-blue-600">
+                Click it
+              </Link>
             </p>
           </div>
         </div>

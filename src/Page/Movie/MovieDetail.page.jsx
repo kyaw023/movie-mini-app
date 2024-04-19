@@ -42,7 +42,6 @@ const MovieDetailPage = () => {
 
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" px-2 md:px-0">
           {/* DetailCard */}

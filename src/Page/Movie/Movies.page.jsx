@@ -28,7 +28,6 @@ const MoviesPage = () => {
   const genres = data?.genres;
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" my-5 px-2 md:px-0">
           <Tabs defaultValue="popular">

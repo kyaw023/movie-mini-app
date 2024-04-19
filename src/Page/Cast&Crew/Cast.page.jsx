@@ -10,7 +10,6 @@ const CastPage = () => {
   const crew = state?.crew;
   return (
     <div>
-      <NavbarComponent />
       <div className=" mt-40">
         {/* original */}
         <div></div>

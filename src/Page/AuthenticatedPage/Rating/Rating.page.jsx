@@ -21,7 +21,6 @@ const RatingPage = () => {
 
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" mt-10 px-2 md:px-0">
           <div>
@@ -50,7 +49,9 @@ const RatingPage = () => {
                         {movie?.release_date}
                       </p>
 
-                      <p className="mt-2 text-slate-500 text-xs md:text-sm">{movie?.overview}</p>
+                      <p className="mt-2 text-slate-500 text-xs md:text-sm">
+                        {movie?.overview}
+                      </p>
                       {/* <div>
                   <ProgressComponent movie={movie} />
                 </div> */}

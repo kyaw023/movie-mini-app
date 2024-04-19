@@ -15,7 +15,6 @@ const HomePage = () => {
   //   useGetTrendingQuery("day");
   return (
     <div>
-      <NavbarComponent />
       <HeroComponent />
       <TrendingComponent />
       <TrailerComponent />

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useParams } from "react-router-dom";
 import {
   AiringTodaySeriesPage,
   CastPage,
@@ -39,6 +39,7 @@ import CollectionSearchPage from "./Page/Search/Collection.search.page";
 import ReviewPage from "./Page/Review/Review.page";
 import NotFoundPage from "./Page/NotFound/NotFound.page";
 import ListsPage from "./Page/AuthenticatedPage/Lists/Lists.page";
+import { NavbarComponent } from "./Components";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -56,6 +57,7 @@ const App = () => {
 
   return (
     <div className="custom-container py-3">
+      <NavbarComponent />
       <Routes>
         <Route path="/" element={<HomePage />} />
 

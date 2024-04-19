@@ -9,12 +9,12 @@ export const PaginationSlice = createSlice({
   name: "pagination",
   initialState,
   reducers: {
-    setCurrentPagePlus: (state, action) => {
-      state.currentPage += action.payload;
+    setCurrentPagePlus: (state) => {
+      state.currentPage += 1;
     },
-    setCurrentPagePrev: (state, action) => {
+    setCurrentPagePrev: (state) => {
       if (state.currentPage > 1) {
-        state.currentPage -= action.payload;
+        state.currentPage -= 1;
       }
     },
   },

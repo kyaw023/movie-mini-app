@@ -14,7 +14,6 @@ const ReviewPage = () => {
 
   return (
     <div>
-      <NavbarComponent />
       <div className=" grid md:grid-cols-3 grid-cols-1 mt-14 px-2 md:px-0 space-y-3 md:space-y-0">
         <div>
           <Button className=" uppercase">
@@ -51,7 +50,9 @@ const ReviewPage = () => {
                       </div>
                     </div>
                   </div>
-                  <p className=" text-secondary-50 mt-4 text-xs md:text-sm">{result?.content}</p>
+                  <p className=" text-secondary-50 mt-4 text-xs md:text-sm">
+                    {result?.content}
+                  </p>
                 </div>
               </div>
             );

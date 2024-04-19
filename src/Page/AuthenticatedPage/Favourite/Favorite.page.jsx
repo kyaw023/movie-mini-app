@@ -7,8 +7,6 @@ const FavoritePage = () => {
   const { username } = useParams();
   return (
     <div>
-      <NavbarComponent />
-
       {/* watchlist */}
       <div className=" mt-10 flex flex-col gap-4 w-full px-2 md:px-0">
         {/* title */}

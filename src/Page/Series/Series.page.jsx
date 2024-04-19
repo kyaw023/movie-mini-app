@@ -30,7 +30,6 @@ const SeriesPage = () => {
   const { isLoading } = useGetAiringTodaySeriesQuery();
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" px-2 md:px-0">
           <div className=" my-5">

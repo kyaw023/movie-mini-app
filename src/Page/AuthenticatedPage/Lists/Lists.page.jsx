@@ -8,7 +8,6 @@ const ListsPage = () => {
 
   return (
     <div>
-      <NavbarComponent isLoading={isLoading} />
       <LoadingComponent isLoading={isLoading}>
         <div className=" mt-10">
           <div className=" flex items-center justify-between">

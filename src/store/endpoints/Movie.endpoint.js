@@ -60,18 +60,18 @@ const MovieEndPoints = MovieAPI.injectEndpoints({
       providesTags: ["themoviedb"],
     }),
     getNowPlayingMovie: builder.query({
-      query: () =>
-        `movie/now_playing?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=1`,
+      query: (pageName) =>
+        `movie/now_playing?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
       providesTags: ["themoviedb"],
     }),
     getTopRatedMovie: builder.query({
-      query: () =>
-        `movie/top_rated?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=1`,
+      query: (pageName) =>
+        `movie/top_rated?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
       providesTags: ["themoviedb"],
     }),
     getUpcomingMovie: builder.query({
-      query: () =>
-        `movie/upcoming?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=1`,
+      query: (pageName) =>
+        `movie/upcoming?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
       providesTags: ["themoviedb"],
     }),
   }),
