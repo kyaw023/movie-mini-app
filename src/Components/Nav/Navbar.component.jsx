@@ -82,7 +82,7 @@ const NavbarComponent = ({ isLoading }) => {
     <div>
       {isLoading ? (
         <div className="flex items-center justify-between select-none px-2 md:px-0">
-          <Skeleton className="h-4 w-[200px] rounded" />
+          <Skeleton className="md:h-4 md:w-[200px] h-10 w-[70px] rounded" />
           <ul className=" md:flex item-center gap-8  hidden  ">
             <Skeleton className="h-1 w-[40px] bg-secondary-50 rounded-none" />
             <Skeleton className="h-1 w-[40px]" />

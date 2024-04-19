@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import { Route, Routes } from "react-router-dom";
 import {
@@ -41,7 +41,16 @@ import NotFoundPage from "./Page/NotFound/NotFound.page";
 import ListsPage from "./Page/AuthenticatedPage/Lists/Lists.page";
 
 const App = () => {
-  const auth = localStorage.getItem("sessionID");
+  const [isAuth, setIsAuth] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("sessionID")) {
+      setIsAuth(true);
+    } else {
+      setIsAuth(false);
+    }
+  }, [localStorage.getItem("sessionID")]);
+
   return (
     <div className="custom-container py-3">
       <Routes>
@@ -95,25 +104,25 @@ const App = () => {
 
         <Route
           path="/u/:username/watchlist"
-          element={!!auth ? <WatchListsPage /> : <NotFoundPage />}
+          element={isAuth ? <WatchListsPage /> : <NotFoundPage />}
         >
           <Route path="tv" element={<WatchListTvPage />} />
           <Route index element={<WatchListsMoviePage />} />
         </Route>
         <Route
           path="/u/:username/favorite"
-          element={!!auth ? <FavoritePage /> : <NotFoundPage />}
+          element={isAuth ? <FavoritePage /> : <NotFoundPage />}
         >
           <Route path="tv" element={<FavoriteTvPage />} />
           <Route index element={<FavoriteMoviePage />} />
         </Route>
         <Route
           path="/u/:username/lists"
-          element={!!auth ? <ListsPage /> : <NotFoundPage />}
+          element={isAuth ? <ListsPage /> : <NotFoundPage />}
         />
         <Route
           path="/u/:username/rating"
-          element={!!auth ? <RatingPage /> : <NotFoundPage />}
+          element={isAuth ? <RatingPage /> : <NotFoundPage />}
         />
       </Routes>
     </div>
