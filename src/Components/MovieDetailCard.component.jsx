@@ -18,10 +18,8 @@ import { toast } from "sonner";
 const CardComponent = ({ data, media_type }) => {
   const { data: watchlistData } = useGetWatchListQuery("movies");
   const { data: favoriteListsData } = useGetFavoriteQuery("movies");
-  const [addToWatchListFun] =
-    useAddToWatchListMutation();
-  const [addToFavoriteFun] =
-    useAddToFavoriteMutation();
+  const [addToWatchListFun] = useAddToWatchListMutation();
+  const [addToFavoriteFun] = useAddToFavoriteMutation();
 
   // alert when click icon
   const isExistedHandler = (isExisted, type) => {
@@ -44,24 +42,28 @@ const CardComponent = ({ data, media_type }) => {
 
   // post data to watchlist and favorite list function
   const addHandler = async (data, type) => {
-    if (type === "watchlist") {
-      const watchlist = {
-        media_type: media_type,
-        media_id: data?.id,
-        sessionID: localStorage.getItem("sessionID"),
-      };
+    if (localStorage.getItem("sessionID")) {
+      if (type === "watchlist") {
+        const watchlist = {
+          media_type: media_type,
+          media_id: data?.id,
+          sessionID: localStorage.getItem("sessionID"),
+        };
 
-      await addToWatchListFun(watchlist);
-      isExistedHandler(isExistedWatchLists, "watchlists");
+        await addToWatchListFun(watchlist);
+        isExistedHandler(isExistedWatchLists, "watchlists");
+      } else {
+        const favoriteList = {
+          media_type: media_type,
+          media_id: data?.id,
+          sessionID: localStorage.getItem("sessionID"),
+        };
+
+        await addToFavoriteFun(favoriteList);
+        isExistedHandler(isExistedFavorite, "favorite");
+      }
     } else {
-      const favoriteList = {
-        media_type: media_type,
-        media_id: data?.id,
-        sessionID: localStorage.getItem("sessionID"),
-      };
-
-      await addToFavoriteFun(favoriteList);
-      isExistedHandler(isExistedFavorite, "favorite");
+      toast.warning(`please login first`);
     }
   };
 

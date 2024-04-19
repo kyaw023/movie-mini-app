@@ -8,7 +8,7 @@ import {
   useGetauthenticateUserMutation,
 } from "../../store/endpoints/Auth.endpoint";
 import { useGetAccountDetailQuery } from "../../store/endpoints/General.endpoint";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ErrorMessage, Form, Formik } from "formik";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
@@ -148,6 +148,9 @@ const SignInPage = () => {
                 </>
               )}
             </Formik>
+            <p className=" text-secondary-50 text-sm mt-4">
+              If you want to see preview <Link to={"/"} className=" text-blue-500">Click it</Link>
+            </p>
           </div>
         </div>
       )}
