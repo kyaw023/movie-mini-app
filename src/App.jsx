@@ -107,25 +107,25 @@ const App = () => {
 
         <Route
           path="/watchlist"
-          element={isAuth ? <WatchListsPage /> : <NotFoundPage />}
+          element={isAuth ? <WatchListsPage /> : <SignInPage />}
         >
           <Route path="tv" element={<WatchListTvPage />} />
           <Route index element={<WatchListsMoviePage />} />
         </Route>
         <Route
           path="/favorite"
-          element={isAuth ? <FavoritePage /> : <NotFoundPage />}
+          element={isAuth ? <FavoritePage /> : <SignInPage />}
         >
           <Route path="tv" element={<FavoriteTvPage />} />
           <Route index element={<FavoriteMoviePage />} />
         </Route>
         <Route
           path="/lists"
-          element={isAuth ? <ListsPage /> : <NotFoundPage />}
+          element={isAuth ? <ListsPage /> : <SignInPage />}
         />
         <Route
           path="/rating"
-          element={isAuth ? <RatingPage /> : <NotFoundPage />}
+          element={isAuth ? <RatingPage /> : <SignInPage />}
         />
       </Routes>
     </div>

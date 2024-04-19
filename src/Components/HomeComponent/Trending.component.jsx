@@ -1,12 +1,10 @@
 import React from "react";
-import {
-  useGetPopularMovieQuery,
-  useGetTrendingQuery,
-} from "../../store/endpoints/Movie.endpoint";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 import TrendingCardComponent from "./TrendingCard.component";
 import LoadingComponent from "../Loading/Loading.component";
+
+import { useGetTrendingQuery } from "../../store/endpoints/Movie.endpoint";
 
 const TrendingComponent = () => {
   const { data: trendingWeek, isLoading: weekIsLoading } =

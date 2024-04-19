@@ -6,16 +6,16 @@ import {
   TrailerComponent,
   TrendingComponent,
 } from "../../Components";
-import { useGetTrendingQuery } from "../../store/endpoints/Movie.endpoint";
+//import { useGetTrendingQuery } from "../../store/endpoints/Movie.endpoint";
 
 const HomePage = () => {
-  const { data: trendingWeek, isLoading: weekIsLoading } =
-    useGetTrendingQuery("week");
-  const { data: trendingDay, isLoading: dayIsLoading } =
-    useGetTrendingQuery("day");
+  // const { data: trendingWeek, isLoading: weekIsLoading } =
+  //   useGetTrendingQuery("week");
+  // const { data: trendingDay, isLoading: dayIsLoading } =
+  //   useGetTrendingQuery("day");
   return (
     <div>
-      <NavbarComponent isLoading={weekIsLoading || dayIsLoading} />
+      <NavbarComponent />
       <HeroComponent />
       <TrendingComponent />
       <TrailerComponent />

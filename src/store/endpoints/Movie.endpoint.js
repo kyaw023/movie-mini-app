@@ -3,8 +3,8 @@ import { MovieAPI } from "../service/MovieAPI.service";
 const MovieEndPoints = MovieAPI.injectEndpoints({
   endpoints: (builder) => ({
     getPopularMovie: builder.query({
-      query: () =>
-        "movie/popular?sort_by=popularity.aesc&api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=2",
+      query: (pageName) =>
+        `movie/popular?sort_by=popularity.aesc&api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageName}`,
       providesTags: ["themoviedb"],
     }),
     getMovieDetail: builder.query({
@@ -50,9 +50,10 @@ const MovieEndPoints = MovieAPI.injectEndpoints({
     }),
     getTrending: builder.query({
       query: (name) =>
-        `trending/movie/${name}?api_key=ec801f669051c57582cfefe0e004e430`,
+        `trending/movie/${name}?api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${"1"}`,
       providesTags: ["themoviedb"],
     }),
+
     getGenres: builder.query({
       query: (name) =>
         `genre/${name}/list?api_key=ec801f669051c57582cfefe0e004e430`,
