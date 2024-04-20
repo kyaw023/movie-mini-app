@@ -23,7 +23,7 @@ const LanguagesComponent = () => {
   return (
     <Select value={languageName} onValueChange={selectHandler}>
       <SelectTrigger className="">
-        <SelectValue placeholder="None selected" />
+        <SelectValue className=" text-white" placeholder="English" />
       </SelectTrigger>
       <SelectContent>
         {data?.map((language, index) => {

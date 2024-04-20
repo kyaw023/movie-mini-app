@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import {
   AiringTodaySeriesPage,
   CastPage,
@@ -46,18 +46,18 @@ import DiscoverMoviePage from "./Page/DiscoverPage/DiscoverMovie.page";
 import DiscoverTvPage from "./Page/DiscoverPage/DiscoverTv.page";
 
 const App = () => {
-  const [isAuth, setIsAuth] = useState(false);
+  const sessionID = localStorage.getItem("sessionID");
+  const accountID = localStorage.getItem("accountID");
+  const [isAuth, setIsAuth] = useState(!!sessionID && !!accountID);
 
   useEffect(() => {
-    if (
-      localStorage.getItem("sessionID") &&
-      localStorage.getItem("accountID")
-    ) {
+    if (sessionID && accountID) {
       setIsAuth(true);
     } else {
       setIsAuth(false);
     }
-  }, [localStorage.getItem("sessionID")]);
+  }, []);
+  console.log(isAuth);
 
   return (
     <div className="custom-container py-3">
@@ -118,25 +118,25 @@ const App = () => {
 
         <Route
           path="/watchlist"
-          element={isAuth ? <WatchListsPage /> : <SignInPage />}
+          element={isAuth ? <WatchListsPage /> : <Navigate to={"/sign-in"} />}
         >
           <Route path="tv" element={<WatchListTvPage />} />
           <Route index element={<WatchListsMoviePage />} />
         </Route>
         <Route
           path="/favorite"
-          element={isAuth ? <FavoritePage /> : <SignInPage />}
+          element={isAuth ? <FavoritePage /> : <Navigate to={"/sign-in"} />}
         >
           <Route path="tv" element={<FavoriteTvPage />} />
           <Route index element={<FavoriteMoviePage />} />
         </Route>
         <Route
           path="/lists"
-          element={isAuth ? <ListsPage /> : <SignInPage />}
+          element={isAuth ? <ListsPage /> : <Navigate to={"/sign-in"} />}
         />
         <Route
           path="/rating"
-          element={isAuth ? <RatingPage /> : <SignInPage />}
+          element={isAuth ? <RatingPage /> : <Navigate to={"/sign-in"} />}
         />
       </Routes>
     </div>

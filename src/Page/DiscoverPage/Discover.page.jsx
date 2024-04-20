@@ -16,7 +16,7 @@ import { Tabs, TabsList, TabsTrigger } from "../../Components/ui/tabs";
 import { Link, Outlet } from "react-router-dom";
 
 const DiscoverPage = () => {
-  const { data } = useGetGenresQuery();
+  const { data } = useGetGenresQuery("movies");
   const genres = data?.genres;
   return (
     <div className=" px-2 md:px-0 grid md:grid-cols-4 grid-cols-1 gap-10 mt-10">

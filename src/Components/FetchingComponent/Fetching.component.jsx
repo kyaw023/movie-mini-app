@@ -1,5 +1,6 @@
 import { Loader2 } from "lucide-react";
 import React from "react";
+import { Skeleton } from "../ui/skeleton";
 
 const FetchingComponent = ({ children, isFetching }) => {
   return (
