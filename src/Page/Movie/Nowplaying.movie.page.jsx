@@ -14,13 +14,16 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "../../Components/ui/pagination";
+
 const NowplayingMoviePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const {
     data: nowPlayingMovie,
     isLoading,
     isFetching,
   } = useGetNowPlayingMovieQuery(currentPage);
+
   return (
     <div>
       {isLoading ? (

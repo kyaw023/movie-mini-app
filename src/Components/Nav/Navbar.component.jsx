@@ -44,8 +44,6 @@ const NavbarComponent = ({ isLoading }) => {
   };
   const { data } = useGetMultiSearchQuery(searchValues);
 
-  console.log(data);
-
   const [logoutFun] = useLogoutMutation();
 
   const queryName = data?.results[0]?.media_type;
@@ -146,6 +144,9 @@ const NavbarComponent = ({ isLoading }) => {
             </NavLink>
             <NavLink to="/people">
               <li>People</li>
+            </NavLink>
+            <NavLink to="/discover">
+              <li>Discoverd</li>
             </NavLink>
           </ul>
 

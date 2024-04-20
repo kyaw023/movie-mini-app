@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useGetPopularMovieQuery } from "../../store/endpoints/Movie.endpoint";
+import { useGetDiscoverMovieQuery } from "../../store/endpoints/Discover.endpoint";
+import { useSelector } from "react-redux";
 import {
   FetchingComponent,
   LoadingComponent,
   MovieCardComponent,
 } from "../../Components";
-import "animate.css";
 import {
   Pagination,
   PaginationContent,
@@ -15,20 +15,25 @@ import {
   PaginationPrevious,
 } from "../../Components/ui/pagination";
 
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   setCurrentPagePlus,
-//   setCurrentPagePrev,
-// } from "../../store/slice/pagination/PaginationSlice";
-const PopularMoviePage = () => {
+const DiscoverMoviePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const sortName = useSelector((state) => state.filter.filterName);
+
+  const languageName = useSelector((state) => state.filter.filterLanguage);
+
+  console.log(sortName);
   const {
-    data: popularMovies,
+    data: discoverMovies,
     isLoading,
     isFetching,
-  } = useGetPopularMovieQuery(currentPage);
+  } = useGetDiscoverMovieQuery({
+    pageName: currentPage,
+    languageName: languageName,
+    sortName: sortName,
+  });
 
+  console.log(discoverMovies);
   return (
     <div className=" ">
       <LoadingComponent isLoading={isLoading}>
@@ -37,7 +42,7 @@ const PopularMoviePage = () => {
             <div>
               <h1 className="text-slate-400">Popular Movie</h1>
               <div className=" grid  md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
-                {popularMovies?.results?.map((movie) => {
+                {discoverMovies?.results?.map((movie) => {
                   return <MovieCardComponent key={movie?.id} movie={movie} />;
                 })}
               </div>
@@ -74,4 +79,4 @@ const PopularMoviePage = () => {
   );
 };
 
-export default PopularMoviePage;
+export default DiscoverMoviePage;

@@ -17,6 +17,7 @@ import {
 
 const TopratedMoviePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const {
     data: topRatedMovie,
     isLoading,

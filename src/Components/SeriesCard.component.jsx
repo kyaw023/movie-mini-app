@@ -9,8 +9,10 @@ const SeriesCardComponent = ({ series }) => {
           <img
             className=" h-[200px] object-cover"
             src={
-              "https://image.tmdb.org/t/p/w500" + series?.backdrop_path ||
-              series?.poster_path
+              series && (series?.backdrop_path || series?.poster_path)
+                ? "https://image.tmdb.org/t/p/w500" +
+                  (series?.backdrop_path || series?.poster_path)
+                : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
             }
             alt=""
           />

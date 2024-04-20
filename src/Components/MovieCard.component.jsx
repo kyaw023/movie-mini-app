@@ -1,17 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
 const MovieCardComponent = ({ movie }) => {
   return (
     <div className="">
       <Link to={`/movie_detail/${movie.id}`} key={movie.id}>
         <div className=" cursor-pointer">
           <img
-            className=" h-[200px] object-cover"
+            className="h-[200px] object-cover bg-white"
             src={
-              "https://image.tmdb.org/t/p/w500" + movie?.backdrop_path ||
-              movie?.poster_path
+              movie && (movie.backdrop_path || movie.poster_path)
+                ? "https://image.tmdb.org/t/p/w500" +
+                  (movie.backdrop_path || movie.poster_path)
+                : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
             }
             alt=""
           />

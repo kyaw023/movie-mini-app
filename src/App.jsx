@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Route, Routes, useParams } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import {
   AiringTodaySeriesPage,
   CastPage,
@@ -40,6 +40,10 @@ import ReviewPage from "./Page/Review/Review.page";
 import NotFoundPage from "./Page/NotFound/NotFound.page";
 import ListsPage from "./Page/AuthenticatedPage/Lists/Lists.page";
 import { NavbarComponent } from "./Components";
+
+import DiscoverPage from "./Page/DiscoverPage/Discover.page";
+import DiscoverMoviePage from "./Page/DiscoverPage/DiscoverMovie.page";
+import DiscoverTvPage from "./Page/DiscoverPage/DiscoverTv.page";
 
 const App = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -97,6 +101,11 @@ const App = () => {
         {/* people */}
         <Route path="/people" element={<PeoplePage />} />
         <Route path="/people_detail/:id" element={<PeopleDetailPage />} />
+
+        <Route path="/discover" element={<DiscoverPage />}>
+          <Route index element={<DiscoverMoviePage />} />
+          <Route path="tv" element={<DiscoverTvPage />} />
+        </Route>
 
         {/* detail */}
         <Route path="/collection/:id" element={<CollectionPage />} />

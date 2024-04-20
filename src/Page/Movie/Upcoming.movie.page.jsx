@@ -17,6 +17,7 @@ import {
 
 const UpcomingMoviePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+
   const {
     data: upcomingMovie,
     isLoading,

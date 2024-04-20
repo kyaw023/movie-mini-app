@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useGetPopularMovieQuery } from "../../store/endpoints/Movie.endpoint";
 import {
   FetchingComponent,
   LoadingComponent,
-  MovieCardComponent,
+  SeriesCardComponent,
 } from "../../Components";
-import "animate.css";
+import { useGetDiscoverTvQuery } from "../../store/endpoints/Discover.endpoint";
+import { useSelector } from "react-redux";
 import {
   Pagination,
   PaginationContent,
@@ -15,35 +15,33 @@ import {
   PaginationPrevious,
 } from "../../Components/ui/pagination";
 
-// import { useDispatch, useSelector } from "react-redux";
-// import {
-//   setCurrentPagePlus,
-//   setCurrentPagePrev,
-// } from "../../store/slice/pagination/PaginationSlice";
-const PopularMoviePage = () => {
+const DiscoverTvPage = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
+  const sortName = useSelector((state) => state.filter.filterName);
+
+  const languageName = useSelector((state) => state.filter.filterLanguage);
+
   const {
-    data: popularMovies,
+    data: discoverTv,
     isLoading,
     isFetching,
-  } = useGetPopularMovieQuery(currentPage);
-
+  } = useGetDiscoverTvQuery({
+    pageName: currentPage,
+    languageName: languageName,
+    sortName: sortName,
+  });
   return (
-    <div className=" ">
-      <LoadingComponent isLoading={isLoading}>
-        <div>
-          <FetchingComponent isFetching={isFetching}>
-            <div>
-              <h1 className="text-slate-400">Popular Movie</h1>
-              <div className=" grid  md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
-                {popularMovies?.results?.map((movie) => {
-                  return <MovieCardComponent key={movie?.id} movie={movie} />;
-                })}
-              </div>
-            </div>
-          </FetchingComponent>
-        </div>
+    <LoadingComponent isLoading={isLoading}>
+      <div>
+        <FetchingComponent isFetching={isFetching}>
+          <h1 className="text-slate-400">Popular Series</h1>
+          <div className=" grid md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
+            {discoverTv?.results?.map((serie) => {
+              return <SeriesCardComponent key={serie?.id} series={serie} />;
+            })}
+          </div>
+        </FetchingComponent>
         <div className=" mt-10">
           <Pagination>
             <PaginationContent>
@@ -69,9 +67,9 @@ const PopularMoviePage = () => {
             </PaginationContent>
           </Pagination>
         </div>
-      </LoadingComponent>
-    </div>
+      </div>
+    </LoadingComponent>
   );
 };
 
-export default PopularMoviePage;
+export default DiscoverTvPage;

@@ -104,8 +104,13 @@ const CardComponent = ({ data, media_type }) => {
         <div className=" mt-6 flex flex-col md:flex-row gap-6">
           {/* detail image */}
           <img
-            className=" h-[280px] w-[200px] object-cover"
-            src={"https://image.tmdb.org/t/p/w500" + data?.poster_path}
+            className=" h-[280px] w-[200px] object-cover bg-white"
+            src={
+              data && (data?.backdrop_path || data?.poster_path)
+                ? "https://image.tmdb.org/t/p/w500" +
+                  (data?.backdrop_path || data?.poster_path)
+                : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+            }
             alt=""
           />
           <div>
