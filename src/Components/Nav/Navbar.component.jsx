@@ -39,23 +39,29 @@ const NavbarComponent = ({ isLoading }) => {
   const [drawer, setDrawer] = useState(false);
   const navigator = useNavigate();
   const [searchValues, setSearchValues] = useState("");
-  //const [queryName, setQueryName] = useState(null);
-  const onChangeHandler = (e) => {
-    setSearchValues(e.target.value);
-  };
-  const { data } = useGetMultiSearchQuery(searchValues);
+  const [searchData, setSearchData] = useState([]);
+  const { data, isLoading: searchLoading } =
+    useGetMultiSearchQuery(searchValues);
+
+  useEffect(() => {
+    setSearchData(data);
+  }, [data]);
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    if (!isLoading) {
-      const queryName = data?.results[0]?.media_type;
-      if (data && data.results.length > 0 && queryName) {
+    if (!searchLoading && searchData && searchData.results.length > 0) {
+      const queryName = searchData.results[0].media_type;
+      if (queryName) {
         navigator(`/search/${queryName}/${searchValues}`, {
-          state: { data, searchValues },
+          state: { searchData, searchValues },
         });
       }
       setSearchValues("");
     }
+  };
+
+  const onChangeHandler = (e) => {
+    setSearchValues(e.target.value);
   };
 
   const [logoutFun] = useLogoutMutation();
