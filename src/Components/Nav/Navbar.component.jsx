@@ -40,6 +40,11 @@ const NavbarComponent = ({ isLoading }) => {
   const navigator = useNavigate();
   const [searchValues, setSearchValues] = useState("");
   const [searchData, setSearchData] = useState([]);
+  //const [queryName, setQueryName] = useState(null);
+  const onChangeHandler = (e) => {
+    setSearchValues(e.target.value);
+  };
+
   const { data, isLoading: searchLoading } =
     useGetMultiSearchQuery(searchValues);
 
@@ -48,11 +53,13 @@ const NavbarComponent = ({ isLoading }) => {
   }, [data]);
 
   const onSubmitHandler = (e) => {
+    console.log(searchValues);
     e.preventDefault();
-    if (!searchLoading && searchData && searchData.results.length > 0) {
-      const queryName = searchData.results[0].media_type;
-      if (queryName) {
-        navigator(`/search/${queryName}/${searchValues}`, {
+    if (!searchLoading) {
+      const queryName = searchData?.results[0]?.media_type;
+      console.log(queryName);
+      if (searchData && searchData.results.length > 0 && queryName) {
+        navigator(`/search/${queryName || "movie"}/${searchValues}`, {
           state: { searchData, searchValues },
         });
       }
@@ -60,9 +67,7 @@ const NavbarComponent = ({ isLoading }) => {
     }
   };
 
-  const onChangeHandler = (e) => {
-    setSearchValues(e.target.value);
-  };
+ 
 
   const [logoutFun] = useLogoutMutation();
 
