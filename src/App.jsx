@@ -57,7 +57,6 @@ const App = () => {
       setIsAuth(false);
     }
   }, []);
-  console.log(isAuth);
 
   return (
     <div className="custom-container py-3">

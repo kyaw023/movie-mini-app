@@ -30,16 +30,23 @@ const NowplayingMoviePage = () => {
         <LoadingComponent />
       ) : (
         <div>
-          <FetchingComponent isFetching={isFetching}>
-            <div>
-              <h1 className="text-slate-400">NowPlaying Movies</h1>
-              <div className=" grid md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
-                {nowPlayingMovie?.results?.map((movie) => {
-                  return <MovieCardComponent key={movie?.id} movie={movie} />;
-                })}
-              </div>
+          <div>
+            <h1 className="text-slate-400">NowPlaying Movies</h1>
+            <div className=" grid md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
+              {nowPlayingMovie?.results?.map((movie) => {
+                return (
+                  <FetchingComponent
+                    isFetching={isFetching}
+                    type={"moviecard"}
+                    key={movie?.id}
+                  >
+                    <MovieCardComponent movie={movie} />
+                  </FetchingComponent>
+                );
+              })}
             </div>
-          </FetchingComponent>
+          </div>
+
           <div>
             <div className=" mt-10">
               <Pagination>

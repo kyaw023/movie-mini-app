@@ -56,8 +56,11 @@ const TopBilledCastComponent = ({ data }) => {
                             <img
                               className=" rounded-lg shadow-lg h-[260px] object-cover object-top backdrop-brightness-100"
                               src={
-                                "https://image.tmdb.org/t/p/w500" +
-                                  person?.profile_path || person?.backdrop_path
+                                person?.profile_path || person?.backdrop_path
+                                  ? "https://image.tmdb.org/t/p/w500" +
+                                      person?.profile_path ||
+                                    person?.backdrop_path
+                                  : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
                               }
                               alt=""
                             />

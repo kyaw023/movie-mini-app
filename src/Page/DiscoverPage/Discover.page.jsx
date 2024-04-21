@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,14 +10,22 @@ import CheckBoxComponent from "../../Components/MovieComponent/CheckBox.componen
 import LanguagesComponent from "../../Components/MovieComponent/Languages.component";
 import { Badge } from "../../Components/ui/badge";
 import { useGetGenresQuery } from "../../store/endpoints/Movie.endpoint";
-//import { useGetDiscoverMovieQuery } from "../../store/endpoints/Discover.endpoint";
 
 import { Tabs, TabsList, TabsTrigger } from "../../Components/ui/tabs";
 import { Link, Outlet } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setGenreID } from "../../store/slice/Filter/FilterSlice";
 
 const DiscoverPage = () => {
-  const { data } = useGetGenresQuery("movies");
+  const { data } = useGetGenresQuery("movie");
   const genres = data?.genres;
+
+  const dispatch = useDispatch();
+
+  const genresHandler = (id) => {
+    dispatch(setGenreID(id));
+  };
+
   return (
     <div className=" px-2 md:px-0 grid md:grid-cols-4 grid-cols-1 gap-10 mt-10">
       <div className=" col-span-1">
@@ -146,8 +154,10 @@ const DiscoverPage = () => {
                         {genres?.map((genre) => {
                           return (
                             <Badge
+                              
+                              onClick={() => genresHandler(genre?.id)}
                               variant={"outline"}
-                              className={" text-slate-200"}
+                              className={" text-slate-200 active:scale-110 duration-300"}
                               key={genre?.id}
                             >
                               {genre?.name}

@@ -10,12 +10,12 @@ const CastPage = () => {
   const crew = state?.crew;
   return (
     <div>
-      <div className=" mt-40">
+      <div className=" md:mt-20 mt-10 px-2 md:px-0 ">
         {/* original */}
         <div></div>
 
         {/* cast and crew */}
-        <div className="grid grid-cols-4">
+        <div className="grid md:grid-cols-4 grid-cols-1">
           {/* cast */}
           <div className=" col-span-3">
             <h1 className=" text-xl font-semibold text-slate-100">

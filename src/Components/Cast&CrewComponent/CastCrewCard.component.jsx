@@ -7,9 +7,9 @@ const CastCardComponent = ({ c }) => {
       <img
         className=" w-24 h-24 object-cover rounded-md"
         src={
-          "https://image.tmdb.org/t/p/w500" + c?.profile_path
+          c?.profile_path
             ? "https://image.tmdb.org/t/p/w500" + c?.profile_path
-            : "https://i0.wp.com/digitalhealthskills.com/wp-content/uploads/2022/11/fd35c-no-user-image-icon-27.png?fit=500%2C500&ssl=1"
+            : "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg"
         }
         alt=""
       />

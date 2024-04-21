@@ -22,10 +22,10 @@ const WatchListsPage = () => {
         <div>
           <Tabs defaultValue="movie" className="">
             <TabsList>
-              <Link to={`/u/${username}/watchlist`}>
+              <Link to={`/watchlist`}>
                 <TabsTrigger value="movie">Movies</TabsTrigger>
               </Link>
-              <Link to={`/u/${username}/watchlist/tv`}>
+              <Link to={`/watchlist/tv`}>
                 <TabsTrigger value="tv">TV</TabsTrigger>
               </Link>
             </TabsList>

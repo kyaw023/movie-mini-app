@@ -12,7 +12,7 @@ const SeriesCardComponent = ({ series }) => {
               series && (series?.backdrop_path || series?.poster_path)
                 ? "https://image.tmdb.org/t/p/w500" +
                   (series?.backdrop_path || series?.poster_path)
-                : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+                : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8oruMfmenl0Gf8qmyupis5g9F-YyXyh9K4xunOWJJtg&s"
             }
             alt=""
           />

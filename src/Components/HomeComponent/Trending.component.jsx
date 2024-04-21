@@ -7,10 +7,16 @@ import LoadingComponent from "../Loading/Loading.component";
 import { useGetTrendingQuery } from "../../store/endpoints/Movie.endpoint";
 
 const TrendingComponent = () => {
-  const { data: trendingWeek, isLoading: weekIsLoading } =
-    useGetTrendingQuery("week");
-  const { data: trendingDay, isLoading: dayIsLoading } =
-    useGetTrendingQuery("day");
+  const {
+    data: trendingWeek,
+    isLoading: weekIsLoading,
+    isFetching: weekIsFetching,
+  } = useGetTrendingQuery("week");
+  const {
+    data: trendingDay,
+    isLoading: dayIsLoading,
+    isFetching: dayIsFetching,
+  } = useGetTrendingQuery("day");
 
   return (
     <LoadingComponent isLoading={weekIsLoading || dayIsLoading}>
@@ -28,6 +34,7 @@ const TrendingComponent = () => {
             <TrendingCardComponent
               trending={trendingDay}
               isLoading={dayIsLoading}
+              isFetching={dayIsFetching}
             />
           </TabsContent>
           <TabsContent
@@ -37,6 +44,7 @@ const TrendingComponent = () => {
             <TrendingCardComponent
               trending={trendingWeek}
               isLoading={weekIsLoading}
+              isFetching={weekIsFetching}
             />
           </TabsContent>
         </Tabs>

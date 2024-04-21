@@ -22,7 +22,8 @@ const DiscoverMoviePage = () => {
 
   const languageName = useSelector((state) => state.filter.filterLanguage);
 
-  console.log(sortName);
+  const genreID = useSelector((state) => state.filter.filterGenres);
+
   const {
     data: discoverMovies,
     isLoading,
@@ -31,23 +32,25 @@ const DiscoverMoviePage = () => {
     pageName: currentPage,
     languageName: languageName,
     sortName: sortName,
+    genreID: genreID,
   });
 
-  console.log(discoverMovies);
   return (
     <div className=" ">
       <LoadingComponent isLoading={isLoading}>
         <div>
-          <FetchingComponent isFetching={isFetching}>
-            <div>
-              <h1 className="text-slate-400">Popular Movie</h1>
-              <div className=" grid  md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
-                {discoverMovies?.results?.map((movie) => {
-                  return <MovieCardComponent key={movie?.id} movie={movie} />;
-                })}
-              </div>
+          <div>
+            <h1 className="text-slate-400">Popular Movie</h1>
+            <div className=" grid  md:grid-cols-6 grid-cols-2 gap-x-2 gap-y-10 mt-5 animate__animated animate__fadeIn">
+              {discoverMovies?.results?.map((movie) => {
+                return (
+                  <FetchingComponent key={movie?.id} isFetching={isFetching}>
+                    <MovieCardComponent movie={movie} />
+                  </FetchingComponent>
+                );
+              })}
             </div>
-          </FetchingComponent>
+          </div>
         </div>
         <div className=" mt-10">
           <Pagination>
@@ -57,6 +60,10 @@ const DiscoverMoviePage = () => {
                   <p></p>
                 ) : (
                   <PaginationPrevious
+                    className={`${
+                      isFetching &&
+                      "pointer-events-none bg-gray-300 text-gray-600"
+                    }`}
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage((prev) => prev + 1)}
                   />
@@ -68,6 +75,10 @@ const DiscoverMoviePage = () => {
 
               <PaginationItem className="bg-white">
                 <PaginationNext
+                  className={`${
+                    isFetching &&
+                    "pointer-events-none bg-gray-300 text-gray-600"
+                  }`}
                   onClick={() => setCurrentPage((prev) => prev + 1)}
                 />
               </PaginationItem>

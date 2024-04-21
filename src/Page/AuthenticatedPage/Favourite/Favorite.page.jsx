@@ -17,10 +17,10 @@ const FavoritePage = () => {
         <div>
           <Tabs defaultValue="movie" className="">
             <TabsList>
-              <Link to={`/u/${username}/favorite`}>
+              <Link to={`/favorite`}>
                 <TabsTrigger value="movie">Movies</TabsTrigger>
               </Link>
-              <Link to={`/u/${username}/favorite/tv`}>
+              <Link to={`/favorite/tv`}>
                 <TabsTrigger value="tv">TV</TabsTrigger>
               </Link>
             </TabsList>
