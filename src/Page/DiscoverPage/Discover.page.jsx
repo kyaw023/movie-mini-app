@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -13,7 +13,7 @@ import { useGetGenresQuery } from "../../store/endpoints/Movie.endpoint";
 
 import { Tabs, TabsList, TabsTrigger } from "../../Components/ui/tabs";
 import { Link, Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setGenreID } from "../../store/slice/Filter/FilterSlice";
 
 const DiscoverPage = () => {
@@ -21,6 +21,8 @@ const DiscoverPage = () => {
   const genres = data?.genres;
 
   const dispatch = useDispatch();
+
+  //const [active, setActive] = useState(false);
 
   const genresHandler = (id) => {
     dispatch(setGenreID(id));
@@ -154,10 +156,9 @@ const DiscoverPage = () => {
                         {genres?.map((genre) => {
                           return (
                             <Badge
-                              
                               onClick={() => genresHandler(genre?.id)}
                               variant={"outline"}
-                              className={" text-slate-200 active:scale-110 duration-300"}
+                              className={` text-slate-200 active:scale-110 duration-300`}
                               key={genre?.id}
                             >
                               {genre?.name}

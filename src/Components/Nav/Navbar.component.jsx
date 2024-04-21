@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -36,25 +36,29 @@ import { useLogoutMutation } from "../../store/endpoints/Auth.endpoint";
 import { toast } from "sonner";
 
 const NavbarComponent = ({ isLoading }) => {
-  const [searchValues, setSearchValues] = useState("");
   const [drawer, setDrawer] = useState(false);
   const navigator = useNavigate();
+  const [searchValues, setSearchValues] = useState("");
+  //const [queryName, setQueryName] = useState(null);
   const onChangeHandler = (e) => {
     setSearchValues(e.target.value);
   };
   const { data } = useGetMultiSearchQuery(searchValues);
 
-  const [logoutFun] = useLogoutMutation();
-
-  const queryName = data?.results[0]?.media_type;
-
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    navigator(`/search/${queryName}/${searchValues}`, {
-      state: { data, searchValues },
-    });
-    setSearchValues("");
+    if (!isLoading) {
+      const queryName = data?.results[0]?.media_type;
+      if (data && data.results.length > 0 && queryName) {
+        navigator(`/search/${queryName}/${searchValues}`, {
+          state: { data, searchValues },
+        });
+      }
+      setSearchValues("");
+    }
   };
+
+  const [logoutFun] = useLogoutMutation();
 
   const { data: accountDetail } = useGetAccountDetailQuery(
     localStorage.getItem("sessionID")

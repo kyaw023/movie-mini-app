@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-
 const initialState = {
-  filterName: "popularity.asc",
+  filterName: "popularity.desc",
   filterLanguage: "en-US",
-  filterGenres: null,
+  filterGenres: 80,
 };
 
 export const FilterSlice = createSlice({

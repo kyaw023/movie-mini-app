@@ -9,12 +9,8 @@ const TrendingCardComponent = ({ trending, isLoading, isFetching }) => {
       <div className="mt-10 grid grid-cols-2 md:grid-cols-8 gap-6">
         {trending?.results?.map((movie) => {
           return (
-            <FetchingComponent isFetching={isFetching}>
-              <MovieCardComponent
-                key={movie?.id}
-                movie={movie}
-                isLoading={isLoading}
-              />
+            <FetchingComponent key={movie?.id} isFetching={isFetching}>
+              <MovieCardComponent movie={movie} isLoading={isLoading} />
             </FetchingComponent>
           );
         })}

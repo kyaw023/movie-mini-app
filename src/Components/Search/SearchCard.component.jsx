@@ -8,8 +8,13 @@ const SearchCardComponent = ({ data: mv, type }) => {
         <Link to={`/${type}/${mv?.id}`}>
           <div className=" md:h-[240px] flex flex-col md:flex-row space-x-5 bg-secondary-100 border border-secondary-50 rounded-md">
             <img
-              className="  md:h-full h-60 md:w-40 object-cover rounded-tl-lg rounded-bl-lg"
-              src={"https://image.tmdb.org/t/p/w500" + mv?.poster_path}
+              className="  md:h-full h-60 md:w-40 object-cover rounded-tl-lg rounded-bl-lg bg-white"
+              src={
+                mv && (mv.backdrop_path || mv.poster_path)
+                  ? "https://image.tmdb.org/t/p/w500" +
+                    (mv.backdrop_path || mv.poster_path)
+                  : "https://redthread.uoregon.edu/files/original/affd16fd5264cab9197da4cd1a996f820e601ee4.png"
+              }
               alt=""
             />
             <div className=" py-5">
