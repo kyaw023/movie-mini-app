@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink, Outlet, useNavigate, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { useGetMultiSearchQuery } from "../../store/endpoints/Search.endpoint";
-import { LoadingComponent, NavbarComponent } from "../../Components";
+import { LoadingComponent } from "../../Components";
 
 const SearchPage = () => {
   const { name } = useParams();
@@ -48,7 +48,9 @@ const SearchPage = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to={`/search/keywords/${name}`}>Keywords</NavLink>
+                    <NavLink to={`/search/${"keywords"}/${name}`}>
+                      Keywords
+                    </NavLink>
                   </li>
                   <li>
                     <NavLink to={`/search/networks/${name}`}>Networks</NavLink>

@@ -57,7 +57,6 @@ const App = () => {
       setIsAuth(false);
     }
   }, []);
-  
 
   return (
     <div className="custom-container py-3">
@@ -88,7 +87,7 @@ const App = () => {
         </Route>
 
         {/* search route */}
-        <Route path="/search" element={<SearchPage />}>
+        <Route path="/search/" element={<SearchPage />}>
           <Route path="tv/:name" element={<TvShowSearchPage />} />
           <Route path="movie/:name" element={<MovieSearchPage />} />
           <Route path="person/:name" element={<PeopleSearchPage />} />

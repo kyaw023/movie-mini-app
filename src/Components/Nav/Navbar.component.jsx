@@ -53,21 +53,12 @@ const NavbarComponent = ({ isLoading }) => {
   }, [data]);
 
   const onSubmitHandler = (e) => {
-    console.log(searchValues);
     e.preventDefault();
-    if (!searchLoading) {
-      const queryName = searchData?.results[0]?.media_type;
-      console.log(queryName);
-      if (searchData && searchData.results.length > 0 && queryName) {
-        navigator(`/search/${queryName || "movie"}/${searchValues}`, {
-          state: { searchData, searchValues },
-        });
-      }
-      setSearchValues("");
-    }
+    navigator(`/search/movie/${searchValues}`, {
+      state: { searchData, searchValues },
+    });
+    setSearchValues("");
   };
-
- 
 
   const [logoutFun] = useLogoutMutation();
 
@@ -90,9 +81,11 @@ const NavbarComponent = ({ isLoading }) => {
   const drawerHandler = () => {
     setDrawer((prev) => !prev);
   };
+
   const signInHandler = () => {
     navigator("/sign-In");
   };
+
   // function if change page  close the drawer
 
   return (
