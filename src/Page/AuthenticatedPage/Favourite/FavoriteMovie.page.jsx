@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { LoadingComponent } from "../../../Components";
 import {
   useGetFavoriteQuery,
@@ -6,9 +6,22 @@ import {
 } from "../../../store/endpoints/General.endpoint";
 import { Link } from "react-router-dom";
 import { Heart, List, Star, X } from "lucide-react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../../../Components/ui/pagination";
 
 const FavoriteMoviePage = () => {
-  const { data: favoriteLists, isLoading } = useGetFavoriteQuery("movies");
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data: favoriteLists, isLoading } = useGetFavoriteQuery({
+    name: "movies",
+    pageNumber: currentPage,
+  });
   const { data: ratingList } = useGetRatingQuery("movies");
 
   const getCommonMovies = (rating, watch) => {
@@ -102,6 +115,33 @@ const FavoriteMoviePage = () => {
               </div>
             );
           })}
+        </div>
+        <div>
+          <div className=" mt-10">
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem className=" bg-white">
+                  {currentPage === 1 ? (
+                    <p></p>
+                  ) : (
+                    <PaginationPrevious
+                      disabled={currentPage === 1}
+                      onClick={() => setCurrentPage((prev) => prev - 1)}
+                    />
+                  )}
+                </PaginationItem>
+                <PaginationItem className=" bg-white">
+                  <PaginationLink href="#">{currentPage}</PaginationLink>
+                </PaginationItem>
+
+                <PaginationItem className="bg-white">
+                  <PaginationNext
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
         </div>
       </LoadingComponent>
     </div>

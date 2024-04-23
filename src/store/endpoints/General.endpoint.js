@@ -27,10 +27,12 @@ const SearchEndpoints = MovieAPI.injectEndpoints({
       invalidatesTags: ["themoviedb"],
     }),
     getFavorite: builder.query({
-      query: (name) =>
-        `account/18543278/favorite/${name}?session_id=${localStorage.getItem(
+      query: ({ name, pageNumber }) => {
+        console.log(name, pageNumber);
+        return `account/18543278/favorite/${name}?session_id=${localStorage.getItem(
           "sessionID"
-        )}&api_key=ec801f669051c57582cfefe0e004e430`,
+        )}&api_key=ec801f669051c57582cfefe0e004e430&language=en-US&page=${pageNumber}`;
+      },
 
       providesTags: ["themoviedb"],
     }),

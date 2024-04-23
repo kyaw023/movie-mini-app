@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import HoverCardComponent from "./HoverCard.component";
 import { Badge } from "./ui/badge";
 
-import { Bookmark, Heart, List, Youtube } from "lucide-react";
+import { Bookmark, Heart, List } from "lucide-react";
 import ProgressComponent from "./Progress/Progress.component";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
 import {
@@ -16,55 +15,70 @@ import {
 import { toast } from "sonner";
 
 const CardComponent = ({ data, media_type }) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const { data: watchlistData } = useGetWatchListQuery("movies");
-  const { data: favoriteListsData } = useGetFavoriteQuery("movies");
-  const [addToWatchListFun] = useAddToWatchListMutation();
-  const [addToFavoriteFun] = useAddToFavoriteMutation();
+  const { data: favoriteListsData } = useGetFavoriteQuery({
+    name: "movies",
+    pageNumber: currentPage,
+  });
 
-  // alert when click icon
-  const isExistedHandler = (isExisted, type) => {
-    if (isExisted) {
-      toast.success(`${data?.original_title || data?.name} already in ${type}`);
-    } else {
-      toast.success(`${data?.original_title || data?.name} added to ${type}`);
+  const [addToWatchListFun, { isSuccess: watchListsSuccess }] =
+    useAddToWatchListMutation();
+  const [addToFavoriteFun, { isSuccess: favoriteListsSuccess }] =
+    useAddToFavoriteMutation();
+
+  // Initialize states for watchlist and favorites existence
+  const [isExistedWatchLists, setIsExistedWatchLists] = useState(false);
+  const [isExistedFavorite, setIsExistedFavorite] = useState(false);
+
+  // Function to check if a movie exists in watchlist or favorites
+  const checkMovieExistence = (list, movieId) => {
+    return list?.results?.some((item) => item?.id === movieId);
+  };
+
+  // Set watchlist and favorites existence based on data from API
+  useEffect(() => {
+    if (watchlistData && favoriteListsData) {
+      setIsExistedWatchLists(checkMovieExistence(watchlistData, data.id));
+      setIsExistedFavorite(checkMovieExistence(favoriteListsData, data.id));
+    }
+  }, [watchlistData, favoriteListsData, data]);
+
+  // Function to handle adding to watchlist or favorites
+  const addHandler = async (type) => {
+    if (!localStorage.getItem("sessionID")) {
+      toast.warning(`Please login first`);
+      return;
+    }
+
+    const listToAdd = {
+      media_type: media_type,
+      media_id: data.id,
+      sessionID: localStorage.getItem("sessionID"),
+    };
+
+    try {
+      if (type === "watchlist") {
+        await addToWatchListFun(listToAdd);
+        setIsExistedWatchLists(true);
+        isExistedHandler(true, "watchlists");
+      } else {
+        await addToFavoriteFun(listToAdd);
+        setIsExistedFavorite(true);
+        isExistedHandler(true, "favorites");
+      }
+    } catch (error) {
+      console.error("Error adding to list:", error);
+      toast.error(`Failed to add to ${type}`);
     }
   };
 
-  // finding movie and tv in watchlist
-  const isExistedWatchLists = watchlistData?.results?.find(
-    (list) => list?.id === data?.id
-  );
-
-  // finding movie and tv in favoritelist
-  const isExistedFavorite = favoriteListsData?.results?.find(
-    (list) => list?.id === data?.id
-  );
-
-  // post data to watchlist and favorite list function
-  const addHandler = async (data, type) => {
-    if (localStorage.getItem("sessionID")) {
-      if (type === "watchlist") {
-        const watchlist = {
-          media_type: media_type,
-          media_id: data?.id,
-          sessionID: localStorage.getItem("sessionID"),
-        };
-
-        await addToWatchListFun(watchlist);
-        isExistedHandler(isExistedWatchLists, "watchlists");
-      } else {
-        const favoriteList = {
-          media_type: media_type,
-          media_id: data?.id,
-          sessionID: localStorage.getItem("sessionID"),
-        };
-
-        await addToFavoriteFun(favoriteList);
-        isExistedHandler(isExistedFavorite, "favorite");
-      }
-    } else {
-      toast.warning(`please login first`);
-    }
+  // Function to handle existence message
+  const isExistedHandler = (isExisted, type) => {
+    const message = isExisted
+      ? `${data.original_title || data.name} added to ${type}`
+      : `${data.original_title || data.name} already in ${type}`;
+    toast.success(message);
   };
 
   return (
@@ -143,13 +157,13 @@ const CardComponent = ({ data, media_type }) => {
                   <HoverCardTrigger className=" ">
                     <div
                       className=" flex items-center gap-2"
-                      onClick={() => addHandler(data, "favorite")}
+                      onClick={() => {
+                        addHandler("favorite");
+                      }}
                     >
                       <Heart
                         fill={`${
-                          !!isExistedFavorite &&
-                          localStorage.getItem("sessionID") &&
-                          "red"
+                          favoriteListsSuccess || isExistedFavorite ? "red" : ""
                         }`}
                         className=" w-10 h-10 text-white border border-secondary-50 p-3 rounded-full"
                       />
@@ -167,13 +181,13 @@ const CardComponent = ({ data, media_type }) => {
                   <HoverCardTrigger className=" ">
                     <div
                       className=" flex items-center gap-2 "
-                      onClick={() => addHandler(data, "watchlist")}
+                      onClick={() => {
+                        addHandler("watchlist");
+                      }}
                     >
                       <Bookmark
                         fill={`${
-                          !!isExistedWatchLists &&
-                          localStorage.getItem("sessionID") &&
-                          "red"
+                          watchListsSuccess || isExistedWatchLists ? "red" : ""
                         }`}
                         className=" w-10 h-10 text-white border border-secondary-50 p-3 rounded-full"
                       />
