@@ -24,6 +24,8 @@ const NowplayingMoviePage = () => {
     isFetching,
   } = useGetNowPlayingMovieQuery(currentPage);
 
+  console.log(nowPlayingMovie?.total_pages);
+
   return (
     <div>
       {isLoading ? (
@@ -66,9 +68,11 @@ const NowplayingMoviePage = () => {
                   </PaginationItem>
 
                   <PaginationItem className="bg-white">
-                    <PaginationNext
-                      onClick={() => setCurrentPage((prev) => prev + 1)}
-                    />
+                    {currentPage < nowPlayingMovie?.total_pages && (
+                      <PaginationNext
+                        onClick={() => setCurrentPage((prev) => prev + 1)}
+                      />
+                    )}
                   </PaginationItem>
                 </PaginationContent>
               </Pagination>

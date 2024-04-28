@@ -28,7 +28,7 @@ const PopularMoviePage = () => {
     isLoading,
     isFetching,
   } = useGetPopularMovieQuery(currentPage);
-
+  console.log(popularMovies?.total_pages);
   return (
     <div className=" ">
       <LoadingComponent isLoading={isLoading}>
@@ -68,9 +68,11 @@ const PopularMoviePage = () => {
               </PaginationItem>
 
               <PaginationItem className="bg-white">
-                <PaginationNext
-                  onClick={() => setCurrentPage((prev) => prev + 1)}
-                />
+                {currentPage < popularMovies?.total_pages && (
+                  <PaginationNext
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                  />
+                )}
               </PaginationItem>
             </PaginationContent>
           </Pagination>

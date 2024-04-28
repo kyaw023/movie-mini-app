@@ -135,9 +135,19 @@ const FavoriteMoviePage = () => {
                 </PaginationItem>
 
                 <PaginationItem className="bg-white">
-                  <PaginationNext
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                  />
+                  {currentPage < favoriteLists?.total_pages ? (
+                    <PaginationNext
+                      onClick={() =>
+                        setCurrentPage((prev) => {
+                          if (prev < favoriteLists?.total_pages) {
+                            return prev + 1;
+                          }
+                        })
+                      }
+                    />
+                  ) : (
+                    ""
+                  )}
                 </PaginationItem>
               </PaginationContent>
             </Pagination>

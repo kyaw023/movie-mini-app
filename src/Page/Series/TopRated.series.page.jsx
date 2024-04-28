@@ -57,9 +57,11 @@ const TopRatedSeriesPage = () => {
               </PaginationItem>
 
               <PaginationItem className="bg-white">
-                <PaginationNext
-                  onClick={() => setCurrentPage((prev) => prev + 1)}
-                />
+                {currentPage < topRatedSereis?.total_pages && (
+                  <PaginationNext
+                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                  />
+                )}
               </PaginationItem>
             </PaginationContent>
           </Pagination>

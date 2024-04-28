@@ -61,9 +61,11 @@ const TopratedMoviePage = () => {
                 </PaginationItem>
 
                 <PaginationItem className="bg-white">
-                  <PaginationNext
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
-                  />
+                  {currentPage < topRatedMovie?.total_pages && (
+                    <PaginationNext
+                      onClick={() => setCurrentPage((prev) => prev + 1)}
+                    />
+                  )}
                 </PaginationItem>
               </PaginationContent>
             </Pagination>
