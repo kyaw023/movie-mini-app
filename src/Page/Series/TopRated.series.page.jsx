@@ -47,8 +47,8 @@ const TopRatedSeriesPage = () => {
                   <p></p>
                 ) : (
                   <PaginationPrevious
-                    disabled={currentPage === 1}
-                    onClick={() => setCurrentPage((prev) => prev + 1)}
+                    aria-disabled={currentPage === 1}
+                    onClick={() => setCurrentPage((prev) => prev - 1)}
                   />
                 )}
               </PaginationItem>
@@ -57,11 +57,15 @@ const TopRatedSeriesPage = () => {
               </PaginationItem>
 
               <PaginationItem className="bg-white">
-                {currentPage < topRatedSereis?.total_pages && (
+                {/* {currentPage < topRatedSereis?.total_pages && (
                   <PaginationNext
                     onClick={() => setCurrentPage((prev) => prev + 1)}
                   />
-                )}
+                )} */}
+                <PaginationNext
+                  aria-disabled={currentPage === topRatedSereis?.total_pages}
+                  onClick={() => setCurrentPage((prev) => prev + 1)}
+                />
               </PaginationItem>
             </PaginationContent>
           </Pagination>

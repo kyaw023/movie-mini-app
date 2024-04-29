@@ -52,7 +52,7 @@ const TopratedMoviePage = () => {
                   ) : (
                     <PaginationPrevious
                       disabled={currentPage === 1}
-                      onClick={() => setCurrentPage((prev) => prev + 1)}
+                      onClick={() => setCurrentPage((prev) => prev - 1)}
                     />
                   )}
                 </PaginationItem>
